@@ -1,6 +1,6 @@
-# feeday :link: /tag.html 
-### :page_facing_up: [2](/tag.html/tag.html) 
+# feeday :link: https://puck.chat/ 
+### :page_facing_up: [2](https://puck.chat//tag.html) 
 ### :speech_balloon: 0 
 ### :hibiscus: 6090 
-### :alarm_clock: 2025-05-18 01:55:58 
+### :alarm_clock: 2025-05-18 02:00:42 
 ### Powered by :heart: [Gmeek](https://github.com/Meekdai/Gmeek)
