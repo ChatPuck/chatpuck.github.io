@@ -4,7 +4,7 @@
     "homeUrl":"https://puck.chat/",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "bottomText":"❤️ 转载文章请注明出处，谢谢！❤️",
-    "iconList": {"tools": "M10 1L12 3L9 6L7 4L8 3L7 2L10 1Z", },
+    "iconList": {"tools": "M10 1L12 3L9 6L7 4L8 3L7 2L10 1Z"},
     "exlink": {"tools": "https://puck.chat/pc.html"},
     "script": "<script src='https://puck.chat/gmeek/GmeekTOC.js'></script>",
     "GMEEK_VERSION":"last"
