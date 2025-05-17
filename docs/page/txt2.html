@@ -16,8 +16,8 @@ h1 {
 
 #textarea {
   width: 63%;
-  height: 355px;
-  margin-top: 20px;
+  height: 410px;
+  margin-top: 10px;
   font-size: 16px;
   padding: 10px;
   border: 2px solid #ddd;
@@ -183,7 +183,6 @@ h1 {
       cursor: not-allowed;
     }
   </style>
-
 <script>
 // 根据用户选择的搜索引擎和输入的关键词跳转
 function searchRedirect(event) {
@@ -224,7 +223,6 @@ n位的数字：\d{n}
 由数字和26个英文字母组成的字符串：[A-Za-z0-9]+
 由数字、26个英文字母或者下划线组成的字符串：\w+ 或 \w{3,20}
 
-curl https://datxy.com/sh/puck.sh -O
 curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
 curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
 curl -sSL https://dokploy.com/install.sh | sudo sh
@@ -245,7 +243,7 @@ tracert	baidu.cn
 grep -rn 'py' /home/
 rm -rf /*"></textarea>
     <div style="flex: 3; display: flex; justify-content: center; align-items: center; width: 20%;">
-        <iframe id="iframe" scrolling="no" src="../page/btv.html" style="width: 100%; height: 395px; border: none;"></iframe>
+        <iframe id="iframe" scrolling="no" src="../page/time.html" style="width: 100%; height: 430px; border: none;"></iframe>
     </div>
 </div>
 
@@ -272,7 +270,13 @@ rm -rf /*"></textarea>
 	  
 <input id="search-input" style="width: 30%;" placeholder="输入要查找的文本" value='https?:\/\/[^\s/$.?#]+[^\s]*?(?=")'>
 <input id="replace-input" style="width: 30%;" placeholder="输入要替换的文本">
-<input type="text" class="form-control mx-3" id="api_key" name="api_key" style="display:none;" style="width: 41%;" placeholder="sk-vrfZIb32CIpkS5BnBd6a301240424781936d3b8a42708f54">
+   
+    
+    <!-- 隐藏的 API Key 输入框（可自行修改显示方式） -->
+    <div class="input-group" style="display: none;">
+      <input type="text" id="api_key" placeholder="sk-ff2099aadf414531b010d47154c050fa">
+       <div id="response">等待请求...</div>
+    </div>
 </div>
   </div>
 	
@@ -288,12 +292,12 @@ rm -rf /*"></textarea>
 <button class="button" id="paste-btn" style="background-color: #FF4500; color: white;">粘贴</button>
 <button class="button" id="clear-btn" style="background-color: red; color: white;">清空</button>
 <button onclick="formatAndPreview()"  style="background-color: #511a1a; color: white;">网页</button>
-<button class="button" style="background-color: purple; color: white;"  id="openkey-btn" data-api-url="https://openkey.cloud/v1/chat/completions">测试</button>
+<button class="button" id="openkey-btn" data-api-url="https://api.deepseek.com/v1/chat/completions" style="background-color: purple;">测试</button>  
+<a href="https://chat18.aichatos18.com/"target="_blank" ><button class="button">文本对话</button></a>
 <a href="https://openkey.cloud/register?aff=OPENK"target="_blank" ><button class="button">代理密钥</button></a>
 <a href="https://platform.deepseek.com/usage"target="_blank" ><button class="button">深度密钥</button></a>
 <a href="https://huggingface.co/spaces?sort=likes"target="_blank" ><button class="button">抱脸空间</button></a>
-<a href="https://modelscope.cn/datasets"target="_blank" ><button class="button">魔搭数据</button></a>  
-
+<a href="https://modelscope.cn/datasets"target="_blank" ><button class="button">魔搭数据</button></a> 
 </div>
 <div id="stats">
 <div id="total">总数：0</div>
@@ -432,67 +436,69 @@ function replaceText() {
             }
         }
 
-        document.getElementById('api_key').addEventListener('blur', function() {
-    var value = this.value.trim();
-    if (!value) {
-        console.log("使用placeholder值作为默认值: " + this.placeholder);
-    } else {
-        console.log("用户输入的值: " + value);
-    }
-});
-
-let apiUrl = ""; // 初始化为空
-
-document.getElementById("openkey-btn").addEventListener("click", function() {
-    apiUrl = this.getAttribute("data-api-url");
-    testAPI(); // 调用API测试函数
-});
-
-function testAPI() {
-    if (!apiUrl) {
-        alert("请选择一个API URL");
+         // 集成 DeepSeek API 调用到“测试”按钮
+    // 点击【测试】按钮后，从隐藏 API Key 获取密钥，从 textarea 获取用户输入，并使用 fetch 调用接口
+    document.getElementById("openkey-btn").addEventListener("click", async function() {
+      const apiUrl = this.getAttribute("data-api-url");
+      const inputField = document.getElementById("api_key");
+      const apiKey = inputField.value.trim() || inputField.placeholder;
+      let originalInput = textarea.value.trim();
+      if (!originalInput) {
+        alert("请输入一些文本！");
         return;
-    }
-
-    const inputField = document.getElementById('api_key');
-    const originalInput = document.getElementById('textarea') ? document.getElementById('textarea').value : '';
-    if (document.getElementById('textarea')) {
-        document.getElementById('textarea').value = "请稍后...";
-    }
-    // 如果输入框为空，则使用placeholder的值；如果不为空，则使用用户输入的值
-    const apiKey = inputField.value.trim() || inputField.placeholder;
-
-    const data = {
-        model: "gpt-4o-mini",
+      }
+      // 显示处理中状态
+      textarea.value = "请稍后...";
+      document.getElementById("response").textContent = "请求中...";
+      
+      const data = {
+        model: "deepseek-chat",
         messages: [
-            { role: "system", content: "You are a helpful assistant." },
-            { role: "user", content: originalInput }
-        ]
-    };
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", apiUrl, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", `Bearer ${apiKey}`);
-
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status === 200) {
-                const response = JSON.parse(this.responseText);
-                if (document.getElementById('textarea')) {
-                    document.getElementById('textarea').value = response.choices[0].message.content;
-                }
-                // updateStats(); // 更新统计信息，根据需要启用
-            } else {
-                if (document.getElementById('textarea')) {
-                    document.getElementById('textarea').value = "请求失败，请检查您的API密钥和其他设置。";
-                }
-            }
+          { role: "system", content: "简要回复，字符不超500个。" },
+          { role: "user", content: originalInput }
+        ],
+        temperature: 0.7,
+        max_tokens: 1000
+      };
+      
+      try {
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+          throw new Error(`HTTP错误! 状态码: ${res.status}`);
         }
-    };
+        const result = await res.json();
+        // 更新 textarea 与响应区域
+        if (result.choices && result.choices[0] && result.choices[0].message) {
+          textarea.value = result.choices[0].message.content;
+        } else {
+          textarea.value = JSON.stringify(result, null, 2);
+        }
+        document.getElementById("response").textContent = JSON.stringify(result, null, 2);
+        updateStats();
+      } catch (error) {
+        textarea.value = "请求失败，请检查您的API密钥和其他设置。";
+        document.getElementById("response").textContent = `请求失败: ${error.message}\n请检查API密钥和网络连接。`;
+        console.error("API请求错误:", error);
+      }
+    });
+    
+    // API Key 输入框 blur 时输出提示信息（调试用）
+    document.getElementById("api_key").addEventListener("blur", function() {
+      const value = this.value.trim();
+      if (!value) {
+        console.log("使用placeholder值作为默认值: " + this.placeholder);
+      } else {
+        console.log("用户输入的值: " + value);
+      }
+    });
 
-    xhr.send(JSON.stringify(data));
-}	
 	copyBtn.addEventListener("click", function() {
     let textToCopy;
     if (textarea.value === "") {

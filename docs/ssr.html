@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSR 订阅转换小工具</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+    textarea { width: 100%; height: 100px; margin-bottom: 1rem; }
+    select, button { padding: 0.5rem; font-size: 1rem; }
+    .output { margin-top: 1rem; word-break: break-all; background: #f7f7f7; padding: 1rem; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>SSR → 订阅链接转换小工具</h1>
+  <p>输入你的 <code>ssr://</code> 链接，选择目标客户端，点击转换即可获得订阅地址。</p>
+
+  <label for="ssrInput">SSR 链接：</label>
+  <textarea id="ssrInput" placeholder="ssr://..." ></textarea>
+
+  <label for="targetSelect">目标客户端：</label>
+  <select id="targetSelect">
+    <option value="clash">Clash</option>
+    <option value="v2ray">V2Ray</option>
+    <option value="ss">Shadowsocks</option>
+    <option value="ssr">SSR</option>
+  </select>
+
+  <button id="convertBtn">生成订阅链接</button>
+
+  <div class="output" id="result" style="display:none;">
+    <strong>生成的订阅链接：</strong>
+    <div id="outputLink"></div>
+  </div>
+
+  <script>
+    document.getElementById('convertBtn').addEventListener('click', () => {
+      const ssr = document.getElementById('ssrInput').value.trim();
+      const target = document.getElementById('targetSelect').value;
+      if (!ssr.startsWith('ssr://')) {
+        alert('请输入有效的 ssr:// 链接');
+        return;
+      }
+      const encoded = encodeURIComponent(ssr);
+      const subUrl = `https://subconverter.speedupvpn.com/sub?target=${target}&url=${encoded}`;
+      document.getElementById('outputLink').textContent = subUrl;
+      document.getElementById('result').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
