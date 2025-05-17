@@ -2,5 +2,6 @@
     "title":"Blog Title",
     "subTitle":"Blog description",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
+       "script": "<script src='https://puck.chat/gmeek/GmeekTOC.js'></script>",
     "GMEEK_VERSION":"last"
 }
