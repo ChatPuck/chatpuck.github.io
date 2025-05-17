@@ -1,7 +1,8 @@
 {
-    "title":"Blog Title",
-    "subTitle":"Blog description",
+    "title":"feeday",
+    "subTitle":"BB Work No Money",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
-       "script": "<script src='https://puck.chat/gmeek/GmeekTOC.js'></script>",
+    "script": "<script src='https://puck.chat/gmeek/GmeekTOC.js'></script>",
+    "script": "<script src='https://puck.chat/gmeek/GmeekVercount.js'></script>",
     "GMEEK_VERSION":"last"
 }
