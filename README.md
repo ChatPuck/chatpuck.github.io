@@ -1,6 +1,6 @@
-# feeday :link: https://pucks.cn/ 
-### :page_facing_up: [2](https://pucks.cn//tag.html) 
+# feeday :link: https://pucks.cn 
+### :page_facing_up: [2](https://pucks.cn/tag.html) 
 ### :speech_balloon: 0 
 ### :hibiscus: 6090 
-### :alarm_clock: 2025-05-18 12:32:38 
+### :alarm_clock: 2025-05-18 12:36:37 
 ### Powered by :heart: [Gmeek](https://github.com/Meekdai/Gmeek)
