@@ -5,7 +5,7 @@
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "bottomText":"❤️ 转载文章请注明出处，谢谢！❤️",
     "iconList": {"xlsx":"M5.75 2.5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-6a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM2 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"},
-    "exlink": {"xlsx":"/pc.html"},
+    "exlink": {"xlsx":"/pc"},
     "script": "<script src='/gmeek/GmeekTOC.js'></script>",
     "GMEEK_VERSION":"last"
 }
