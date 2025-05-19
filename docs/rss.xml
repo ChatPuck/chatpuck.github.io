@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Mon, 19 May 2025 14:24:24 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>同步代码</title><link>https://pucks.cn/post/tong-bu-dai-ma.html</link><description>## 常用的 Git 命令
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Mon, 19 May 2025 14:49:58 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>同步代码</title><link>https://pucks.cn/post/tong-bu-dai-ma.html</link><description>## 常用的 Git 命令
+
+更新端口刷新DNS
+
+```
+git config --global http.proxy 127.0.0.1:7890
+git config --global https.proxy 127.0.0.1:7890
+ipconfig/flushdns
+```
+
+拉取仓库本地到本地推送到远程仓库
+
+```
+git clone https://github.com/lllyasviel/Fooocus.git
+git add . 
+git commit -m 'Your commit message' 
+git push origin main
+```
 
 ### 1. **克隆远程仓库**
 
@@ -97,8 +114,6 @@ git checkout branch-name
 ```bash
 git merge branch-name
 ```
-
-
 
 
 
