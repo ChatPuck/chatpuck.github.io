@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Mon, 19 May 2025 15:47:33 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>同步代码</title><link>https://pucks.cn/post/tong-bu-dai-ma.html</link><description>## 常用的 Git 命令
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Mon, 19 May 2025 15:49:32 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>同步代码</title><link>https://pucks.cn/post/tong-bu-dai-ma.html</link><description>## 常用的 Git 命令
 
 更新端口刷新DNS
 
@@ -11,6 +11,7 @@ ipconfig/flushdns
 ### 代码仓库拉取推送
 
 - https://github.com/settings/ssh/new
+- https://huggingface.co/settings/keys/add?type=ssh
 
 拉取仓库本地到本地推送到远程仓库
 
