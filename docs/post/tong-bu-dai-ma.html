@@ -19,14 +19,24 @@ git config --global http.proxy 127.0.0.1:7890
 git config --global https.proxy 127.0.0.1:7890
 ipconfig/flushdns
 ```
+### 代码仓库拉取推送
+
+- https://github.com/settings/ssh/new
 
 拉取仓库本地到本地推送到远程仓库
 
 ```
 git clone https://github.com/lllyasviel/Fooocus.git
+git config --global user.email 'you@example.com'
+git config --global user.name 'Your Name'
+git remote set-url origin git@github.com:lllyasviel/Fooocus.git
+ssh-keygen -t rsa -b 4096 -C 'your_email@example.com'
+ssh -T git@github.com
 git add . 
-git commit -m 'Your commit message' 
-git push origin main
+git commit -m 'Test' 
+
+git push origin main 
+git pull origin main
 ```
 
 ### 1. **克隆远程仓库**
@@ -139,14 +149,24 @@ git config --global http.proxy 127.0.0.1:7890
 git config --global https.proxy 127.0.0.1:7890
 ipconfig/flushdns
 ```
+### 代码仓库拉取推送
+
+- https://github.com/settings/ssh/new
 
 拉取仓库本地到本地推送到远程仓库
 
 ```
 git clone https://github.com/lllyasviel/Fooocus.git
+git config --global user.email 'you@example.com'
+git config --global user.name 'Your Name'
+git remote set-url origin git@github.com:lllyasviel/Fooocus.git
+ssh-keygen -t rsa -b 4096 -C 'your_email@example.com'
+ssh -T git@github.com
 git add . 
-git commit -m 'Your commit message' 
-git push origin main
+git commit -m 'Test' 
+
+git push origin main 
+git pull origin main
 ```
 
 ### 1. **克隆远程仓库**
@@ -325,11 +345,22 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 git config --global https.proxy 127.0.0.1:7890
 ipconfig/flushdns
 </code></pre>
+<h3>代码仓库拉取推送</h3>
+<ul>
+<li><a href="https://github.com/settings/ssh/new">https://github.com/settings/ssh/new</a></li>
+</ul>
 <p>拉取仓库本地到本地推送到远程仓库</p>
 <pre class="notranslate"><code class="notranslate">git clone https://github.com/lllyasviel/Fooocus.git
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git remote set-url origin git@github.com:lllyasviel/Fooocus.git
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh -T git@github.com
 git add . 
-git commit -m "Your commit message" 
-git push origin main
+git commit -m "Test" 
+
+git push origin main 
+git pull origin main
 </code></pre>
 <h3>1. <strong>克隆远程仓库</strong></h3>
 <p>克隆一个远程仓库到本地，命令如下：</p>
