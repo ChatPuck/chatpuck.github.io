@@ -1,5 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Wed, 21 May 2025 15:18:09 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>移到文件</title><link>https://pucks.cn/post/yi-dao-wen-jian.html</link><description>### 按照指定文件名移到文件
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Wed, 21 May 2025 15:22:10 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>查找替换</title><link>https://pucks.cn/post/cha-zhao-ti-huan.html</link><description>搜索匹配当前目录下所有[文件名]或文件里的内容打印显示行号
+```
+grep -rn 'Money' *
+```
+
+搜索多个文件并查找匹配文本在哪些文件中：
+```
+grep -l 'Money' file1 file2 file3...
+```
+
+查找 formatting.php 文件内 length’, 55 替换 length’, 56 :
+```
+sed -i s/'length', 55'/'length', 56'/g `grep 'length', 55' -rl --include='formatting.php' ./`
+```。</description><guid isPermaLink="true">https://pucks.cn/post/cha-zhao-ti-huan.html</guid><pubDate>Wed, 21 May 2025 15:21:43 +0000</pubDate></item><item><title>移到文件</title><link>https://pucks.cn/post/yi-dao-wen-jian.html</link><description>### 按照指定文件名移到文件
 
 ### 简介
 假设目录与文件如下：
