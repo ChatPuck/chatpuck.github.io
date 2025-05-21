@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Wed, 21 May 2025 15:22:10 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>查找替换</title><link>https://pucks.cn/post/cha-zhao-ti-huan.html</link><description>搜索匹配当前目录下所有[文件名]或文件里的内容打印显示行号
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Wed, 21 May 2025 15:26:19 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>获取网页链接</title><link>https://pucks.cn/post/huo-qu-wang-ye-lian-jie.html</link><description>控制台浏览器获取网址
+```
+const links = document.getElementsByTagName('a');
+// 遍历所有链接并查找匹配的网址
+for (const link of links) {
+  const href = link.href;
+  // 使用正则表达式匹配类似的网址
+  const urlRegex = /https:\/\/www\.bilibili\.com\/video\/[A-Za-z0-9]+\/?/;
+  if (urlRegex.test(href)) {
+    console.log('匹配到的网址: ' + href);
+  }
+}
+```。</description><guid isPermaLink="true">https://pucks.cn/post/huo-qu-wang-ye-lian-jie.html</guid><pubDate>Wed, 21 May 2025 15:25:51 +0000</pubDate></item><item><title>查找替换</title><link>https://pucks.cn/post/cha-zhao-ti-huan.html</link><description>搜索匹配当前目录下所有[文件名]或文件里的内容打印显示行号
 ```
 grep -rn 'Money' *
 ```
