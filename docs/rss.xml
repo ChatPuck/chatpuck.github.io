@@ -1,5 +1,189 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Tue, 03 Jun 2025 13:24:36 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>图像分类脚本</title><link>https://pucks.cn/post/tu-xiang-fen-lei-jiao-ben.html</link><description>## ResNet50
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Feeday</title><link>https://pucks.cn</link><description>BB Work No Money</description><copyright>Feeday</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://pucks.cn</link></image><lastBuildDate>Sat, 07 Jun 2025 05:17:31 +0000</lastBuildDate><managingEditor>Feeday</managingEditor><ttl>60</ttl><webMaster>Feeday</webMaster><item><title>图像直方图在线调节</title><link>https://pucks.cn/post/tu-xiang-zhi-fang-tu-zai-xian-diao-jie.html</link><description>```
+&lt;!DOCTYPE html&gt;
+&lt;html lang='zh-CN'&gt;
+&lt;head&gt;
+&lt;meta charset='UTF-8'&gt;
+&lt;title&gt;在线图像直方图与调整&lt;/title&gt;
+&lt;style&gt;
+body { font-family: sans-serif; padding: 20px; max-width: 1000px; margin: auto; }
+#controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+.control-group { display: flex; align-items: center; }
+.control-group label { width: 80px; }
+.control-group input[type=range] { flex: 1; margin: 0 10px; }
+.control-group input[type=number] { width: 60px; }
+canvas { border: 1px solid #ccc; display: block; margin-bottom: 20px; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;在线图像直方图与调整&lt;/h2&gt;
+&lt;input type='file' id='fileInput' accept='image/*'&gt;
+&lt;div id='controls'&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='exposureRange'&gt;曝光&lt;/label&gt;
+&lt;input type='range' id='exposureRange' min='-2' max='2' step='0.1' value='0'&gt;
+&lt;input type='number' id='exposureNumber' min='-2' max='2' step='0.1' value='0'&gt;
+&lt;/div&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='contrastRange'&gt;对比度&lt;/label&gt;
+&lt;input type='range' id='contrastRange' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;input type='number' id='contrastNumber' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;/div&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='highlightsRange'&gt;高光&lt;/label&gt;
+&lt;input type='range' id='highlightsRange' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;input type='number' id='highlightsNumber' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;/div&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='shadowsRange'&gt;阴影&lt;/label&gt;
+&lt;input type='range' id='shadowsRange' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;input type='number' id='shadowsNumber' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;/div&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='whitesRange'&gt;白色&lt;/label&gt;
+&lt;input type='range' id='whitesRange' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;input type='number' id='whitesNumber' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;/div&gt;
+&lt;div class='control-group'&gt;
+&lt;label for='blacksRange'&gt;黑色&lt;/label&gt;
+&lt;input type='range' id='blacksRange' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;input type='number' id='blacksNumber' min='-1' max='1' step='0.05' value='0'&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;canvas id='previewCanvas' width='800' height='600'&gt;&lt;/canvas&gt;
+&lt;canvas id='histCanvas' width='800' height='200'&gt;&lt;/canvas&gt;
+
+&lt;!-- 引入 Chart.js --&gt;
+&lt;script src='https://cdn.jsdelivr.net/npm/chart.js'&gt;&lt;/script&gt;
+&lt;script&gt;
+let originalImageData = null;
+const previewCanvas = document.getElementById('previewCanvas');
+const previewCtx = previewCanvas.getContext('2d');
+const histCanvas = document.getElementById('histCanvas');
+const histCtx = histCanvas.getContext('2d');
+let histChart = null;
+
+// 读取控件元素
+const controls = ['exposure','contrast','highlights','shadows','whites','blacks'];
+const state = {};
+controls.forEach(name =&gt; {
+state[name] = 0;
+const rangeEl = document.getElementById(name + 'Range');
+const numEl = document.getElementById(name + 'Number');
+// 同步滑块和数字
+rangeEl.addEventListener('input', () =&gt; { numEl.value = rangeEl.value; updateState(); });
+numEl.addEventListener('input', () =&gt; { rangeEl.value = numEl.value; updateState(); });
+});
+
+document.getElementById('fileInput').addEventListener('change', (e) =&gt; {
+const file = e.target.files[0];
+if (!file) return;
+const img = new Image();
+img.onload = () =&gt; {
+// 调整画布大小
+previewCanvas.width = img.width;
+previewCanvas.height = img.height;
+previewCtx.drawImage(img, 0, 0);
+originalImageData = previewCtx.getImageData(0, 0, img.width, img.height);
+applyAdjustments();
+};
+img.src = URL.createObjectURL(file);
+});
+
+function updateState() {
+controls.forEach(name =&gt; {
+state[name] = parseFloat(document.getElementById(name + 'Number').value);
+});
+applyAdjustments();
+}
+
+function applyAdjustments() {
+if (!originalImageData) return;
+const imgData = new ImageData(
+new Uint8ClampedArray(originalImageData.data),
+originalImageData.width,
+originalImageData.height
+);
+const data = imgData.data;
+const {exposure, contrast, highlights, shadows, whites, blacks} = state;
+for (let i = 0; i &lt; data.length; i += 4) {
+let r = data[i] / 255;
+let g = data[i+1] / 255;
+let b = data[i+2] / 255;
+// 亮度
+const lum = 0.2126*r + 0.7152*g + 0.0722*b;
+// 曝光：2^EV
+const evFactor = Math.pow(2, exposure);
+r *= evFactor; g *= evFactor; b *= evFactor;
+// 对比度
+const cFactor = contrast + 1;
+r = (r - 0.5) * cFactor + 0.5;
+g = (g - 0.5) * cFactor + 0.5;
+b = (b - 0.5) * cFactor + 0.5;
+// 高光/阴影
+if (lum &gt; 0.5) {
+const factor = (lum - 0.5) * 2;
+r += highlights * factor;
+g += highlights * factor;
+b += highlights * factor;
+} else {
+const factor = (0.5 - lum) * 2;
+r += shadows * factor;
+g += shadows * factor;
+b += shadows * factor;
+}
+// 白色/黑色剪切
+if (lum &gt; 0.8) {
+const factor = (lum - 0.8) * 5;
+r += whites * factor; g += whites * factor; b += whites * factor;
+}
+if (lum &lt; 0.2) {
+const factor = (0.2 - lum) * 5;
+r -= blacks * factor; g -= blacks * factor; b -= blacks * factor;
+}
+// 限幅
+data[i]   = Math.min(255, Math.max(0, r * 255));
+data[i+1] = Math.min(255, Math.max(0, g * 255));
+data[i+2] = Math.min(255, Math.max(0, b * 255));
+}
+// 更新预览
+previewCtx.putImageData(imgData, 0, 0);
+updateHistogram(imgData);
+}
+
+function updateHistogram(imageData) {
+const bins = 256;
+const counts = new Array(bins).fill(0);
+const data = imageData.data;
+for (let i = 0; i &lt; data.length; i += 4) {
+// 灰度值
+const lum = Math.round(0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2]);
+counts[lum]++;
+}
+const labels = counts.map((_,i) =&gt; i);
+if (!histChart) {
+histChart = new Chart(histCtx, {
+type: 'bar',
+data: {
+labels,
+datasets: [{ label: '像素数', data: counts, backgroundColor: 'rgba(0,0,0,0.5)' }]
+},
+options: {
+responsive: true,
+scales: { x: { display: false }, y: { beginAtZero: true } },
+plugins: { legend: { display: false } }
+}
+});
+} else {
+histChart.data.datasets[0].data = counts;
+histChart.update();
+}
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+````。</description><guid isPermaLink="true">https://pucks.cn/post/tu-xiang-zhi-fang-tu-zai-xian-diao-jie.html</guid><pubDate>Sat, 07 Jun 2025 05:17:06 +0000</pubDate></item><item><title>图像分类脚本</title><link>https://pucks.cn/post/tu-xiang-fen-lei-jiao-ben.html</link><description>## ResNet50
 ```
 import subprocess
 import sys
