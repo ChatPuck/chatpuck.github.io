@@ -43,8 +43,8 @@
   "desc": "终端性能测试",
   "links": {
     "http": "https://github.com/feeday/cpuckTest/archive/refs/tags/v1.0.0.zip",
-    "hfCn": "http://cpu.jy6d.com/",
-    "hf": "http://gpu.jy6d.com/"
+    "hfCn": "http://gpu.jy6d.com/",
+    "hf": "http://cpu.jy6d.com/"
   },
   "isTop": true,
   "hideOnMobile": true
