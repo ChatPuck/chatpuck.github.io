@@ -1,6 +1,23 @@
 [
   {
     "source": "github-issue",
+    "issue": 7,
+    "isArticle": true,
+    "cat": "log",
+    "title": "3G-USB",
+    "desc": "Windows 11 修复华为 WCDMA USB 上网卡驱动记录\n设备信息\n设备：\nHUAWEI Mobile Connect - USB Device\n\n硬件 ID：\nUSB\\VID_12D1&PID_1446\n\n驱动：\newusbdev.sys\n\n驱动版本：\n1.0.0.7\n\n驱动日期：\n2009/07/23\n\n设备类型：\nHUAWEI WCDMA 3",
+    "content": "Windows 11 修复华为 WCDMA USB 上网卡驱动记录\n设备信息\n设备：\nHUAWEI Mobile Connect - USB Device\n\n硬件 ID：\nUSB\\VID_12D1&PID_1446\n\n驱动：\newusbdev.sys\n\n驱动版本：\n1.0.0.7\n\n驱动日期：\n2009/07/23\n\n设备类型：\nHUAWEI WCDMA 3G USB Modem\n\n\n一、初始问题\nWindows 11 插入设备后提示：\n无法在此设备上加载驱动程序\n\n驱动程序:\newusbdev.sys\n\n安全设置将阻止加载此驱动程序\n\n设备管理器：\nHUAWEI Mobile Connect - USB Device (COM5)\n\n状态：\n代码 39\n\nWindows 无法加载这个硬件的设备驱动程序。\n驱动程序可能已损坏或不存在。\n\n\n二、确认驱动来源\n执行：\npnputil /enum-drivers | findstr /i /c:\"Huawei\" /c:\"ewusb\"\n发现：\n原始名称: ewusbdev.inf\n提供程序名称: HUAWEI Incorporated\n驱动程序版本: 07/23/2009 1.0.0.7\n属性: Legacy\n\n完整驱动组件：\newusbdev.inf\newser2k.inf\newmdm2k.inf\newnet.inf\newdcsc.inf\n\n功能：\n\n\n\n文件\n功能\n\n\n\n\newusbdev.inf\nUSB/COM驱动\n\n\newser2k.inf\n串口驱动\n\n\newmdm2k.inf\nModem驱动\n\n\newnet.inf\n网络驱动\n\n\newdcsc.inf\nSIM卡相关\n\n\n\n\n三、排查 Windows 安全阻止\n1. 检查内存完整性\n执行：\nreg query HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity\n结果：\nEnabled REG_DWORD 0x0\n\n说明：\n内存完整性已经关闭\n\n\n2. 检查驱动阻止列表\n执行：\nreg query HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\Config /v VulnerableDriverBlocklistEnable\n结果：\nVulnerableDriverBlocklistEnable REG_DWORD 0x1\n\n说明：\nWindows 11 仍通过易受攻击驱动阻止列表拦截老驱动。\n\n四、关闭驱动阻止列表\n管理员 CMD：\nreg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\Config /v VulnerableDriverBlocklistEnable /t REG_DWORD /d 0 /f\n结果：\n操作成功完成\n\n重启电脑。\n\n五、驱动恢复成功\n重启后设备管理器出现：\nHUAWEI Mobile Connect - 3G Application Interface (COM7)\n\nHUAWEI Mobile Connect - 3G PC UI Interface (COM8)\n\n说明：\nUSB驱动正常\n串口驱动正常\n华为模块正常启动\n\n\n六、进入华为模块调试\n工具：\nMobaXterm\n\n连接：\nSerial\n\nCOM8\n\n115200\n\n启动信息：\n^SIMST:255\n\n^BOOT:40995901,0,0,0,20\n\n^SRVST:4\n\n说明：\n华为基带芯片已经启动\n\n\n七、SIM卡问题排查\n联通客户端提示：\n无SIM卡或SIM卡错误\n\n更换SIM卡测试：\n仍无法识别\n\n判断：\n不是 Windows 驱动问题。\n可能原因：\n\nSIM卡兼容问题\nSIM卡槽接触问题\n模块SIM读卡部分故障\n3G网络退网导致业务不可用\n\n\n八、是否可以升级4G？\n结论：\n不能\n\n原因：\n该设备硬件属于：\nWCDMA/HSPA 3G Modem\n\n硬件结构：\nUSB接口\n ↓\n3G基带芯片\n ↓\nWCDMA射频\n ↓\n天线\n\n4G LTE需要：\nLTE基带芯片\n ↓\nLTE射频\n ↓\nLTE频段支持\n\n驱动只能控制已有硬件。\n不能增加：\n\nLTE基带\nLTE射频\n4G频段支持\n\n因此：\n修改驱动 ≠ 支持4G\n\n刷固件 ≠ 变4G\n\n\n九、最终结果\n已解决\n✅ Windows 11 驱动加载问题\n✅ ewusbdev.sys 被阻止问题\n✅ COM通信恢复\n✅ 华为模块启动正常\n未解决\nSIM无法识别。\n最终判断\n设备：\n2009年前后的华为WCDMA 3G USB上网卡\n\n不是4G设备。\n\n十、4G替代设备建议\n如果需要4G LTE：\n推荐：\nHuawei E3372\n\nHuawei E8372\n\nZTE MF79U\n\n这些属于真正 LTE 硬件。\n\n总结\n本次测试证明：\nWindows 11\n+\n2009 Huawei WCDMA USB Modem\n+\nLegacy驱动\n\n仍然可以恢复运行\n\n但是：\n3G硬件无法通过驱动升级成为4G",
+    "tag": [
+      "documentation"
+    ],
+    "date": "2026-09-26",
+    "updated_at": "2026-09-26T16:12:58Z",
+    "url": "/blog/7.html",
+    "markdown": "/blog/md/7.md",
+    "issue_url": "https://github.com/feeday/cpuck.com/issues/7"
+  },
+  {
+    "source": "github-issue",
     "issue": 6,
     "isArticle": true,
     "cat": "log",
