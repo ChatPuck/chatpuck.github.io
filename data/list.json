@@ -1,5 +1,4 @@
 [
-{"cat":"image","title":"银河系全景图","desc":"eso1242a.psb","links":{"hf":"https://huggingface.co/datasets/datxy/demo/blob/main/test/eso1242a.psb","hfCn":"https://hf-mirror.com/datasets/datxy/demo/blob/main/test/eso1242a.psb","http":"https://www.eso.org/public/images/eso1242a/"}},
 {"cat":"ad","title":"Leaderboard","desc":"模型排行榜","url":"https://artificialanalysis.ai/?intelligence=coding-index","isTop":true},
 {"cat":"image","title":"NanoBananaPro","desc":"Banana 官网图像生成","url":"https://labs.google/fx/zh/tools/flow","isTop":true,"hideOnMobile":true},
 {"cat":"video","title":"Seedance 2.0","desc":"每天5条10秒视频豆包免费生成。","url":"https://www.doubao.com/chat/create-image","isTop":true},
@@ -11,6 +10,19 @@
     "http": "/aigx-x.html",
     "hfCn": "https://github.com/ChatPuck/Web/issues/new",
     "hf": "https://chat.openai.com/"
+  },
+  "isTop": true,
+  "hideOnMobile": true
+},
+
+  {
+  "cat": "tool",
+  "title": "Network",
+  "desc": "网络地址测速",
+  "links": {
+    "http": "http://cs1.bbn.com.cn:8800/gzweb/",
+    "hfCn": "https://hf-mirror.com/datasets/datxy/demo/blob/main/test/eso1242a.psb",
+    "hf": "http://ping0.cc/"
   },
   "isTop": true,
   "hideOnMobile": true
@@ -39,9 +51,7 @@
   "isTop": true,
   "hideOnMobile": true
 },
-{"cat":"tool","title":"IP-Addrs","desc":"高精度IP地址归属地查询。","url":"http://ping0.cc/","isTop":true},
 {"cat":"text","title":"Translate","desc":"谷歌文档文字在线翻译。","url":"https://translate.google.com/"},
-{"cat":"tool","title":"BBN Speed Test","desc":"北京联通宽带测速。","url":"http://cs1.bbn.com.cn:8800/gzweb/","isTop":true},
 {"cat":"audio","title":"云听","desc":"中央广播电台。","url":"https://www.radio.cn/pc-portal/erji/radioStation.html","hideOnMobile":true},
 {"cat":"audio","title":"有声书","desc":"喜马拉雅有声故事。","url":"https://www.ximalaya.com/youshengshu/updates/","hideOnMobile":true},
 {"cat":"video","title":"LTX-2.3","desc":"在线图生视频带音效。","url":"https://huggingface.co/spaces/Lightricks/LTX-2-3"},
