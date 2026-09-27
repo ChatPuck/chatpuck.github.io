@@ -1,7 +1,19 @@
 [
-{"cat":"ad","title":"Leaderboard","desc":"模型排行榜","url":"https://artificialanalysis.ai/?intelligence=coding-index","isTop":true},
 {"cat":"image","title":"NanoBananaPro","desc":"Banana 官网图像生成","url":"https://labs.google/fx/zh/tools/flow","isTop":true,"hideOnMobile":true},
 {"cat":"video","title":"Seedance 2.0","desc":"每天5条10秒视频豆包免费生成。","url":"https://www.doubao.com/chat/create-image","isTop":true},
+ {
+  "cat": "tool",
+  "title": "Aigx",
+  "desc": "模型资讯排行榜",
+  "links": {
+    "http": "https://artificialanalysis.ai/?intelligence=coding-index",
+    "hfCn": "https://aihot.virxact.com/",
+    "hf": "https://arxiv.org/list/cs.AI/recent"
+  },
+  "isTop": true,
+  "hideOnMobile": true
+},
+ 
  {
   "cat": "tool",
   "title": "Aigx",
