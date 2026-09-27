@@ -3,7 +3,7 @@
 {"cat":"video","title":"Seedance 2.0","desc":"每天5条10秒视频豆包免费生成。","url":"https://www.doubao.com/chat/create-image","isTop":true},
  {
   "cat": "tool",
-  "title": "Aigx",
+  "title": "AI News",
   "desc": "模型资讯排行榜",
   "links": {
     "http": "https://artificialanalysis.ai/?intelligence=coding-index",
